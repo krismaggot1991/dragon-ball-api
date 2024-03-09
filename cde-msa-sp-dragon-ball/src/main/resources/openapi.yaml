@@ -451,13 +451,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpecificCharacterResponse'
+                $ref: '#/components/schemas/FavoriteCharacterResponse'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/FavoriteCharacterResponse'
               examples:
                 Internal server error response:
                   value:
@@ -468,7 +468,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/FavoriteCharacterResponse'
               examples:
                 Not found response:
                   value:
@@ -527,13 +527,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpecificCharacterResponse'
+                $ref: '#/components/schemas/GenericResponse'
         '500':
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/GenericResponse'
               examples:
                 Internal server error response:
                   value:
@@ -544,7 +544,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/GenericResponse'
               examples:
                 Not found response:
                   value:
@@ -555,7 +555,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CharactersResponse'
+                $ref: '#/components/schemas/GenericResponse'
               examples:
                 Bad request response:
                   value:
@@ -614,6 +614,21 @@ components:
           example: "OK"
         data:
           $ref: '#/components/schemas/SpecificCharactersDataResponse'
+    FavoriteCharacterResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "Response's code"
+          example: "200"
+        message:
+          type: string
+          description: "Response's message"
+          example: "OK"
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpecificCharactersDataResponse'
     SpecificCharactersDataResponse:
       type: object
       properties:

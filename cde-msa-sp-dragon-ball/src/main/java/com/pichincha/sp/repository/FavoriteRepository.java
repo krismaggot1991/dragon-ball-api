@@ -9,4 +9,6 @@ import reactor.core.publisher.Flux;
 public interface FavoriteRepository extends ReactiveCrudRepository<FavoriteEntity, Long> {
 
   Flux<FavoriteEntity> findByUserNameAndCharacterId(String userName, String characterId);
+
+  Flux<FavoriteEntity> findByUserName(String userName);
 }

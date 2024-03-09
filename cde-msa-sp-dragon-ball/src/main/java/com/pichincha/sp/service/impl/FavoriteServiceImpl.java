@@ -2,8 +2,10 @@ package com.pichincha.sp.service.impl;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.services.server.models.FavoriteCharacterResponse;
 import com.pichincha.services.server.models.FavoritesRequest;
 import com.pichincha.services.server.models.GenericResponse;
+import com.pichincha.services.server.models.SpecificCharacterResponse;
 import com.pichincha.sp.domain.enums.StatusCodeEnum;
 import com.pichincha.sp.domain.jpa.FavoriteEntity;
 import com.pichincha.sp.repository.FavoriteRepository;
@@ -49,4 +51,17 @@ public class FavoriteServiceImpl implements FavoriteService {
             .message(StatusCodeEnum.BAD_REQUEST_REGISTER_FAVORITE_CHARACTER.getMessage()))));
 
   }
+
+  @Override
+  public Mono<FavoriteCharacterResponse> getFavoriteFromUser(String username) {
+    return favoriteRepository.findByUserName(username)
+        .flatMap(favoriteEntity -> dragonBallService.getSpecificCharacter(favoriteEntity.getCharacterId())
+            .map(SpecificCharacterResponse::getData))
+        .collectList()
+        .map(data -> new FavoriteCharacterResponse()
+            .code(StatusCodeEnum.OK.getCode())
+            .data(data)
+            .message(StatusCodeEnum.OK.getMessage()));
+  }
+
 }

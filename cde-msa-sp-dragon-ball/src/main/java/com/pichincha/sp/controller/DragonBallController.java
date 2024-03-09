@@ -4,6 +4,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 import com.pichincha.services.server.SupportApi;
 import com.pichincha.services.server.models.CharactersResponse;
+import com.pichincha.services.server.models.FavoriteCharacterResponse;
 import com.pichincha.services.server.models.FavoritesRequest;
 import com.pichincha.services.server.models.GenericResponse;
 import com.pichincha.services.server.models.LoginResponse;
@@ -48,15 +49,15 @@ public class DragonBallController implements SupportApi {
   }
 
   @Override
-  public Mono<ResponseEntity<SpecificCharacterResponse>> supportDragonBallV1FavoritesUsernameCharacterIdDelete(String username, String characterId,
+  public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1FavoritesUsernameCharacterIdDelete(String username, String characterId,
       String xGuid, String xProcess, String xFlow, ServerWebExchange exchange) {
     return null;
   }
 
   @Override
-  public Mono<ResponseEntity<SpecificCharacterResponse>> supportDragonBallV1FavoritesUsernameGet(String username, String xGuid, String xProcess,
+  public Mono<ResponseEntity<FavoriteCharacterResponse>> supportDragonBallV1FavoritesUsernameGet(String username, String xGuid, String xProcess,
       String xFlow, ServerWebExchange exchange) {
-    return null;
+    return favoriteService.getFavoriteFromUser(username).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
