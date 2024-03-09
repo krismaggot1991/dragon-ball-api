@@ -19,7 +19,7 @@ plugins {
     id "org.springframework.boot" version "3.1.7"
     id "io.spring.dependency-management" version "1.1.0"
     id "jacoco"
-} 
+}
 
 springBoot {
     mainClass = "com.pichincha.sp.OptimusMainApplication"
@@ -50,12 +50,13 @@ repositories {
             username 'BancoPichinchaEC'
             password 'bf6vaiw32rjk626hkxvkkd5r6wxjheszqzoez527ybglpbnyozpq'
         }
-    }    
-} 
+    }
+}
 
 ext {
     mapstructVersion = "1.4.2.Final"
     lombokVersion = "1.18.26"
+    mapstruct = "1.5.3.Final"
 }
 
 
@@ -67,6 +68,9 @@ dependencies {
     //dependency Base
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.1.3'
+    implementation "org.mapstruct:mapstruct:${mapstruct}"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct}"
 
     //dependencies for default
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -75,18 +79,17 @@ dependencies {
     // dependency from optimus
 
     //dependencias para redis
-    
+
 
     //dependencias para circuit breaker
-    
+
 
     //dependencias feing o web client
-    
+
 
     //dependencias graphql
-    
-	
-	
+
+
     //test
     implementation group: "com.pichincha", name: "optimus-generateunittest-webflux", version: "1.0.6"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -97,33 +100,32 @@ dependencies {
 
 task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
     generatorName = "spring"
-    templateDir ="$rootDir/src/main/resources/openapi-templates"
+    templateDir = "$rootDir/src/main/resources/openapi-templates"
     inputSpec = "$rootDir/src/main/resources/openapi.yaml".toString()
     outputDir = "$buildDir/generated".toString()
     apiPackage = "com.pichincha.services.server"
     modelPackage = "com.pichincha.services.server.models"
     library = "spring-boot"
     configOptions = [
-      skipDefaultInterface                    : "true",
-      useSpringBoot3                          : "true",
-      useJakartaEe                            : "true",
-      serializableModel                       : "true",
-      dateLibrary                             : "java8",
-      openApiNullable                         : "false",
-      reactive                                : "true",
-      apiFirst                                : "false",
-      delegatePattern                         : "false",
-      configPackage                           : "com.pichincha.services.config",
-      sourceFolder                            : "src/main/java",
-      basePackage                             : "com.pichincha",
-      disallowAdditionalPropertiesIfNotPresent: "true",
-      interfaceOnly                           : "true"
-]
+            skipDefaultInterface                    : "true",
+            useSpringBoot3                          : "true",
+            useJakartaEe                            : "true",
+            serializableModel                       : "true",
+            dateLibrary                             : "java8",
+            openApiNullable                         : "false",
+            reactive                                : "true",
+            apiFirst                                : "false",
+            delegatePattern                         : "false",
+            configPackage                           : "com.pichincha.services.config",
+            sourceFolder                            : "src/main/java",
+            basePackage                             : "com.pichincha",
+            disallowAdditionalPropertiesIfNotPresent: "true",
+            interfaceOnly                           : "true"
+    ]
 }
 
 
- 
-compileJava.dependsOn buildSpringServer 
+compileJava.dependsOn buildSpringServer
 
 task optimusCreateUnitTest(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
@@ -138,11 +140,11 @@ compileJava {
             "-Amapstruct.defaultComponentModel=spring"
     ]
 }
- 
+
 sourceSets.main.java.srcDirs = ["$buildDir/generated/src/main/java", "src/main/java"]
 
-springBoot{
-    buildInfo() 
+springBoot {
+    buildInfo()
 }
 
 test {

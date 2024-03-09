@@ -9,3 +9,8 @@ management:
   endpoint:
     health:
       show-details: always
+
+configurations:
+  max-in-memory-size: ${MAX_IN_MEMORY_SIZE:41943040}
+  connect-timeout: ${CONNECT_TIMEOUT:30000}
+  read-timeout: ${READ_TIMEOUT:30000}
