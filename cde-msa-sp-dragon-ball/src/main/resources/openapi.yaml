@@ -1,0 +1,698 @@
+openapi: 3.0.3
+info:
+  title: Dragon Ball API
+  contact:
+    name: BANCO PICHINCHA
+    url: https://www.api-devs.bancopichincha.com
+    email: cmuyonri@pichincha.com
+  version: 1.0.0
+  description: |-
+    Microservice application of Dragon Ball services.
+    
+    > <b>Área de negocio</b> `Chapter`<br>
+    
+    > <b>Dominio de negocio</b> `Desarrollo`
+
+servers:
+  - url: http://localhost:8080
+    description: Local hostname
+tags:
+  - name: Dragon Ball API
+    description: Dragon Ball API services
+paths:
+  /support/dragon-ball/v1/characters:
+    get:
+      tags:
+        - Dragon Ball API
+      summary: Get all characters.
+      parameters:
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "process"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "flow"
+      responses:
+        '200':
+          description: Responses from control list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Successful response:
+                  value:
+                    code: "200"
+                    message: "OK"
+                    data:
+                      - name: "Goku"
+                        gender: "Male"
+                        ki: "60.000.000"
+                        image: "https://res.cloudinary.com/dgtgbyo76/image/upload/v1699044374/hlpy6q013uw3itl5jzic.webp"
+                      - name: "Vegeta"
+                        gender: "Male"
+                        ki: "54.000.000"
+                        image: "https://res.cloudinary.com/dgtgbyo76/image/upload/v1699044422/i9hpfjplth6gjudvhsx3.webp"
+                      - name: "Piccolo"
+                        gender: "Male"
+                        ki: "2.000.000"
+                        image: "https://res.cloudinary.com/dgtgbyo76/image/upload/v1699044481/u9fhpc9smihu2kud3cuc.webp"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+  /support/dragon-ball/v1/characters/{id}:
+    get:
+      tags:
+        - Dragon Ball API
+      summary: Get specific character.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "14"
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "process"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "flow"
+      responses:
+        '200':
+          description: Responses from control list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecificCharacterResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+  /support/dragon-ball/v1/user:
+    post:
+      tags:
+        - Dragon Ball API
+      summary: Register a user.
+      parameters:
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "transactional"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "onboard"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+        '406':
+          description: User already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "406"
+                    message: "User already exists"
+  /support/dragon-ball/v1/login:
+    post:
+      tags:
+        - Dragon Ball API
+      summary: Login user.
+      parameters:
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "transactional"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "onboard"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+        '406':
+          description: Email or password incorrect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "406"
+                    message: "Email or password incorrect"
+  /support/dragon-ball/v1/favorites:
+    post:
+      tags:
+        - Dragon Ball API
+      summary: Add character to favorites of a user.
+      parameters:
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "transactional"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "onboard"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoritesRequest'
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+  /support/dragon-ball/v1/favorites/{username}:
+    get:
+      tags:
+        - Dragon Ball API
+      summary: Get favorites characters of a user.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "cmuyon"
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "process"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "flow"
+      responses:
+        '200':
+          description: Responses from control list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecificCharacterResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+  /support/dragon-ball/v1/favorites/{username}/{characterId}:
+    delete:
+      tags:
+        - Dragon Ball API
+      summary: Get favorites characters of a user.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "cmuyon"
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "5"
+        - name: x-guid
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "9b193801-e6cf-42d6-b10a-71d93b81d9a8"
+        - name: x-process
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "process"
+        - name: x-flow
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "flow"
+      responses:
+        '200':
+          description: Responses from control list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecificCharacterResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Internal server error response:
+                  value:
+                    code: "500"
+                    message: "500 INTERNAL_SERVER_ERROR"
+        '404':
+          description: Not found (Path incorrect)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Not found response:
+                  value:
+                    code: "404"
+                    message: "404 NOT_FOUND"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharactersResponse'
+              examples:
+                Bad request response:
+                  value:
+                    code: "400"
+                    message: "Input invalid"
+components:
+  schemas:
+    CharactersResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "Response's code"
+          example: "200"
+        message:
+          type: string
+          description: "Response's message"
+          example: "OK"
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharactersDataResponse'
+    CharactersDataResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Dragon Ball character name"
+          example: "Goku"
+        gender:
+          type: string
+          description: "Dragon Ball character gender"
+          example: "Male"
+        ki:
+          type: string
+          description: "Dragon Ball character ki"
+          example: "60.000.000"
+        image:
+          type: string
+          description: "Dragon Ball character image"
+          example: "https://res.cloudinary.com/dgtgbyo76/image/upload/v1699044374/hlpy6q013uw3itl5jzic.webp"
+    SpecificCharacterResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "Response's code"
+          example: "200"
+        message:
+          type: string
+          description: "Response's message"
+          example: "OK"
+        data:
+          $ref: '#/components/schemas/SpecificCharactersDataResponse'
+    SpecificCharactersDataResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Dragon Ball character name"
+          example: "Goku"
+        gender:
+          type: string
+          description: "Dragon Ball character gender"
+          example: "Male"
+        race:
+          type: string
+          description: "Dragon Ball character race"
+          example: "Saiyan"
+        originPlanet:
+          type: string
+          description: "Dragon Ball character origin planet"
+          example: "Vegita"
+        ki:
+          type: string
+          description: "Dragon Ball character ki"
+          example: "60.000.000"
+        maxKi:
+          type: string
+          description: "Dragon Ball character max ki"
+          example: "90 Septillion"
+        image:
+          type: string
+          description: "Dragon Ball character image"
+          example: "https://res.cloudinary.com/dgtgbyo76/image/upload/v1699044374/hlpy6q013uw3itl5jzic.webp"
+        description:
+          type: string
+          description: "Dragon Ball character description"
+          example: "El protagonista de la serie, conocido por su gran poder y personalidad amigable."
+        affiliation:
+          type: string
+          description: "Dragon Ball character affiliation"
+          example: "Z Fighter"
+    RegisterUserRequest:
+      type: object
+      properties:
+        userName:
+          type: string
+          description: "User name"
+          example: "cmuyon"
+        email:
+          type: string
+          description: "User email"
+          example: "cmuyonri@pichincha.com"
+        password:
+          type: string
+          description: "User password"
+          example: "password"
+      required:
+        - userName
+        - email
+        - password
+    GenericResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "Response's code"
+          example: "200"
+        message:
+          type: string
+          description: "Response's message"
+          example: "OK"
+    LoginUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: "User email"
+          example: "cmuyonri@pichincha.com"
+        password:
+          type: string
+          description: "User password"
+          example: "password"
+      required:
+        - email
+        - password
+    FavoritesRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: "User name"
+          example: "cmuyon"
+        characterId:
+          type: string
+          description: "Character id"
+          example: "5"
+      required:
+        - username
+        - characterId
