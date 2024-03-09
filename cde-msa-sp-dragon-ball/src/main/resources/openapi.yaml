@@ -653,14 +653,20 @@ components:
           type: string
           description: "User name"
           example: "cmuyon"
+          minLength: 1
+          maxLength: 50
         email:
           type: string
           description: "User email"
           example: "cmuyonri@pichincha.com"
+          minLength: 1
+          maxLength: 50
         password:
           type: string
           description: "User password"
           example: "password"
+          minLength: 1
+          maxLength: 50
       required:
         - userName
         - email

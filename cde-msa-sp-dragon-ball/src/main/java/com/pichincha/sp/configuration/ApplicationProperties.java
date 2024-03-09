@@ -1,6 +1,7 @@
 package com.pichincha.sp.configuration;
 
 import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PUBLIC;
 
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -19,6 +20,21 @@ public class ApplicationProperties {
   Integer connectTimeout;
   Integer readTimeout;
   Services services;
+
+  Postgresql postgresql;
+
+  @Data
+  @FieldDefaults(level = PUBLIC)
+  public static class Postgresql {
+
+    String host;
+    Integer port;
+    String dbname;
+    String schema;
+    String username;
+    String password;
+    String sslMode;
+  }
 
   @Data
   @FieldDefaults(level = PRIVATE)

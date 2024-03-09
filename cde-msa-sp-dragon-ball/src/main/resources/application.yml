@@ -34,3 +34,12 @@ configurations:
         path: ${DBZ_ALL_CHARACTERS_PATH:/api/characters?limit=100}
       specific-character:
         path: ${DBZ_SPECIFIC_CHARACTER_PATH:/api/characters/%s}
+
+  postgresql:
+    host: ${ONB_POSTGRESQL_HOST:localhost}
+    port: ${ONB_POSTGRESQL_PORT:5432}
+    dbname: ${POSTGRESQL_DBNAME:dragonball}
+    schema: ${POSTGRESQL_SCHEMA:dragonball}
+    username: ${POSTGRESQL_USERNAME:cde-msa-dragon-ball}
+    password: ${POSTGRESQL_PASSWORD:12345678}
+    ssl-mode: ${POSTGRESQL_SSL:disable}

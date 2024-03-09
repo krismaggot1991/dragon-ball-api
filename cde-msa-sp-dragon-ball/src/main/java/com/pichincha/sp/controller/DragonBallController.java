@@ -10,6 +10,7 @@ import com.pichincha.services.server.models.LoginUserRequest;
 import com.pichincha.services.server.models.RegisterUserRequest;
 import com.pichincha.services.server.models.SpecificCharacterResponse;
 import com.pichincha.sp.service.DragonBallService;
+import com.pichincha.sp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import reactor.core.publisher.Mono;
 public class DragonBallController implements SupportApi {
 
   DragonBallService dragonBallService;
+  UserService userService;
 
   @Override
   public Mono<ResponseEntity<CharactersResponse>> supportDragonBallV1CharactersGet(String xGuid, String xProcess, String xFlow,
@@ -63,6 +65,6 @@ public class DragonBallController implements SupportApi {
   @Override
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1UserPost(String xGuid, String xProcess, String xFlow,
       RegisterUserRequest registerUserRequest, ServerWebExchange exchange) {
-    return null;
+    return userService.registerUser(registerUserRequest).map(result -> ResponseEntity.ok().body(result));
   }
 }

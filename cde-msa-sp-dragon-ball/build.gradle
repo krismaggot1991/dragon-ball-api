@@ -88,8 +88,9 @@ dependencies {
 
 
     //dependencias db
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtimeOnly 'org.postgresql:postgresql'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-r2dbc', version: '3.1.0'
+    implementation group: 'org.postgresql', name: 'r2dbc-postgresql', version: '1.0.1.RELEASE'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.8'
     implementation "org.flywaydb:flyway-core"
 
 

@@ -9,7 +9,8 @@ import lombok.experimental.FieldDefaults;
 public enum StatusCodeEnum {
 
   OK("200", "OK"),
-  NOT_FOUND("404", "Character not found");
+  NOT_FOUND("404", "Character not found"),
+  USER_ALREADY_EXISTS("406", "User already exists");
   String code;
   String message;
 
