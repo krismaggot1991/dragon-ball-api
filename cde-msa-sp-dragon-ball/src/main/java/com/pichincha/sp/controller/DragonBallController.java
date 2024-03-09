@@ -6,6 +6,7 @@ import com.pichincha.services.server.SupportApi;
 import com.pichincha.services.server.models.CharactersResponse;
 import com.pichincha.services.server.models.FavoritesRequest;
 import com.pichincha.services.server.models.GenericResponse;
+import com.pichincha.services.server.models.LoginResponse;
 import com.pichincha.services.server.models.LoginUserRequest;
 import com.pichincha.services.server.models.RegisterUserRequest;
 import com.pichincha.services.server.models.SpecificCharacterResponse;
@@ -57,7 +58,7 @@ public class DragonBallController implements SupportApi {
   }
 
   @Override
-  public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1LoginPost(String xGuid, String xProcess, String xFlow,
+  public Mono<ResponseEntity<LoginResponse>> supportDragonBallV1LoginPost(String xGuid, String xProcess, String xFlow,
       LoginUserRequest loginUserRequest, ServerWebExchange exchange) {
     return userService.loginUser(loginUserRequest).map(result -> ResponseEntity.ok().body(result));
   }

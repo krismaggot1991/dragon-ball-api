@@ -3,6 +3,8 @@ package com.pichincha.sp.service.impl;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.pichincha.services.server.models.GenericResponse;
+import com.pichincha.services.server.models.LoginDataResponse;
+import com.pichincha.services.server.models.LoginResponse;
 import com.pichincha.services.server.models.LoginUserRequest;
 import com.pichincha.services.server.models.RegisterUserRequest;
 import com.pichincha.sp.domain.enums.StatusCodeEnum;
@@ -43,15 +45,18 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Mono<GenericResponse> loginUser(LoginUserRequest loginUserRequest) {
+  public Mono<LoginResponse> loginUser(LoginUserRequest loginUserRequest) {
     return userRepository.findByEmailAndPassword(loginUserRequest.getEmail(), loginUserRequest.getPassword())
         .collectList()
-        .filter(List::isEmpty)
-        .flatMap(userEntities -> Mono.just(new GenericResponse()
-            .code(StatusCodeEnum.LOGIN_INCORRECT.getCode())
-            .message(StatusCodeEnum.LOGIN_INCORRECT.getMessage())))
-        .switchIfEmpty(Mono.defer(() -> Mono.just(new GenericResponse()
+        .filter(userEntities -> !userEntities.isEmpty())
+        .flatMap(userEntities -> Mono.just(new LoginResponse()
             .code(StatusCodeEnum.OK.getCode())
-            .message(StatusCodeEnum.OK.getMessage()))));
+            .message(StatusCodeEnum.OK.getMessage())
+            .data(new LoginDataResponse()
+                .email(userEntities.get(0).getEmail())
+                .userName(userEntities.get(0).getUserName()))))
+        .switchIfEmpty(Mono.defer(() -> Mono.just(new LoginResponse()
+            .code(StatusCodeEnum.LOGIN_INCORRECT.getCode())
+            .message(StatusCodeEnum.LOGIN_INCORRECT.getMessage()))));
   }
 }
