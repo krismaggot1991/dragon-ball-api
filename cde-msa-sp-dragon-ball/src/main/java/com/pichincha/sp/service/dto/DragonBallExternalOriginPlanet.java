@@ -13,16 +13,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = PRIVATE)
-public class DragonBallExternalCharacterResponse {
+public class DragonBallExternalOriginPlanet {
 
-  String id;
   String name;
-  String ki;
-  String maxKi;
-  String race;
-  String gender;
-  String description;
-  String image;
-  String affiliation;
-  DragonBallExternalOriginPlanet originPlanet;
 }

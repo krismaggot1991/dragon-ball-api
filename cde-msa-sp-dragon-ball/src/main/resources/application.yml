@@ -14,3 +14,10 @@ configurations:
   max-in-memory-size: ${MAX_IN_MEMORY_SIZE:41943040}
   connect-timeout: ${CONNECT_TIMEOUT:30000}
   read-timeout: ${READ_TIMEOUT:30000}
+  services:
+    dragon-ball:
+      base-path: ${DBZ_BASE_PATH:https://dragonball-api.com}
+      all-characters:
+        path: ${DBZ_ALL_CHARACTERS_PATH:/api/characters?limit=100}
+      specific-character:
+        path: ${DBZ_SPECIFIC_CHARACTER_PATH:/api/characters/%s}

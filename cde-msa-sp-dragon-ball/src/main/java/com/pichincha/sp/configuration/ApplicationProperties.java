@@ -18,4 +18,39 @@ public class ApplicationProperties {
   DataSize maxInMemorySize;
   Integer connectTimeout;
   Integer readTimeout;
+  Services services;
+
+  @Data
+  @FieldDefaults(level = PRIVATE)
+  public static class Services {
+
+    DragonBall dragonBall;
+
+  }
+
+  @Data
+  @FieldDefaults(level = PRIVATE)
+  public static class DragonBall {
+
+    String basePath;
+    AllCharacters allCharacters;
+    SpecificCharacter specificCharacter;
+
+  }
+
+  @Data
+  @FieldDefaults(level = PRIVATE)
+  public static class AllCharacters {
+
+    String path;
+
+  }
+
+  @Data
+  @FieldDefaults(level = PRIVATE)
+  public static class SpecificCharacter {
+
+    String path;
+
+  }
 }

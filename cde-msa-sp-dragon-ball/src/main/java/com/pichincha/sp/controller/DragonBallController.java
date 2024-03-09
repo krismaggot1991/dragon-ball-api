@@ -33,7 +33,7 @@ public class DragonBallController implements SupportApi {
   @Override
   public Mono<ResponseEntity<SpecificCharacterResponse>> supportDragonBallV1CharactersIdGet(String id, String xGuid, String xProcess, String xFlow,
       ServerWebExchange exchange) {
-    return null;
+    return dragonBallService.getSpecificCharacter(id).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override

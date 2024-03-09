@@ -3,6 +3,7 @@ package com.pichincha.sp.service.impl;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.pichincha.services.server.models.CharactersResponse;
+import com.pichincha.services.server.models.SpecificCharacterResponse;
 import com.pichincha.sp.domain.enums.StatusCodeEnum;
 import com.pichincha.sp.repository.ExternalDragonBallRepository;
 import com.pichincha.sp.service.DragonBallService;
@@ -28,6 +29,18 @@ public class DragonBallServiceImpl implements DragonBallService {
           charactersResponse.setCode(StatusCodeEnum.OK.getCode());
           charactersResponse.setMessage(StatusCodeEnum.OK.getMessage());
           return charactersResponse;
+        });
+  }
+
+  @Override
+  public Mono<SpecificCharacterResponse> getSpecificCharacter(String id) {
+    return externalDragonBallRepository.getSpecificCharacter(id)
+        .map(dragonBallExternalCharacterResponse -> {
+          SpecificCharacterResponse specificCharacterResponse = new SpecificCharacterResponse();
+          specificCharacterResponse.setCode(StatusCodeEnum.OK.getCode());
+          specificCharacterResponse.setMessage(StatusCodeEnum.OK.getMessage());
+          specificCharacterResponse.setData(dragonBallMapper.toSpecificCharactersDataResponse(dragonBallExternalCharacterResponse));
+          return specificCharacterResponse;
         });
   }
 }

@@ -606,6 +606,10 @@ components:
     SpecificCharactersDataResponse:
       type: object
       properties:
+        id:
+          type: string
+          description: "Dragon Ball character id"
+          example: "1"
         name:
           type: string
           description: "Dragon Ball character name"

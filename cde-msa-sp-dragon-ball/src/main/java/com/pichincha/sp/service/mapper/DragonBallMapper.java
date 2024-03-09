@@ -5,6 +5,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 import com.pichincha.services.server.models.CharactersDataResponse;
 import com.pichincha.services.server.models.CharactersResponse;
+import com.pichincha.services.server.models.SpecificCharactersDataResponse;
 import com.pichincha.sp.service.dto.DragonBallExternalApiResponse;
 import com.pichincha.sp.service.dto.DragonBallExternalCharacterResponse;
 import java.util.ArrayList;
@@ -39,4 +40,11 @@ public abstract class DragonBallMapper {
   @Mapping(target = "data", expression = "java(toCharactersDataResponseList(dragonBallExternalApiResponse))")
   public abstract CharactersResponse toCharactersResponse(DragonBallExternalApiResponse dragonBallExternalApiResponse);
 
+  @Mapping(target = "originPlanet", expression = "java(toOriginPlanet(dragonBallExternalCharacterResponse))")
+  public abstract SpecificCharactersDataResponse toSpecificCharactersDataResponse(
+      DragonBallExternalCharacterResponse dragonBallExternalCharacterResponse);
+
+  protected String toOriginPlanet(DragonBallExternalCharacterResponse dragonBallExternalCharacterResponse) {
+    return dragonBallExternalCharacterResponse.getOriginPlanet().getName();
+  }
 }
