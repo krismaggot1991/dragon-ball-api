@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   namespace: default
-  name: onb-msa-sp-dragon-ball
+  name: cde-msa-sp-dragon-ball
   description: Microservice application of Dragon Ball services.
 
 > <b>Área de negocio</b> `Chapter`<br>
@@ -28,7 +28,7 @@ metadata:
     title: DocumentacionTecnica
  
   annotations:
-    dev.azure.com/project-repo: /onb-msa-sp-dragon-ball #Actualizar nombre del proyecto/nombre del repositorio
+    dev.azure.com/project-repo: /cde-msa-sp-dragon-ball #Actualizar nombre del proyecto/nombre del repositorio
     dynatrace.com/dynatrace-entity-id: SERVICE-C239FA30AC6CB3A1 #Actualizar con el identificador de dynatrece
     sonarcloud.io/project-key: 96df633c-6f1a-4095-a272-819141d75c0e #Actualizar con el projectKey de Sonar
  

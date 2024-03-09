@@ -1,17 +1,11 @@
 spring:
   application:
-    name: onb-msa-sp-dragon-ball
+    name: cde-msa-sp-dragon-ball
   header:
     channel: digital
-    medium: web  
+    medium: web
 
- 
-
-
-
- 
-
-
-
-
- 
+management:
+  endpoint:
+    health:
+      show-details: always
