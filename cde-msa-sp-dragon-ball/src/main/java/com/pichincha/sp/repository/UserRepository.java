@@ -11,4 +11,6 @@ public interface UserRepository extends ReactiveCrudRepository<UserEntity, Long>
   Flux<UserEntity> findByUserNameOrEmail(String userName, String email);
 
   Flux<UserEntity> findByEmailAndPassword(String email, String password);
+
+  Flux<UserEntity> findByUserName(String userName);
 }

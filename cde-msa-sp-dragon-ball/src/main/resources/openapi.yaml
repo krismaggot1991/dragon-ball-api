@@ -382,6 +382,17 @@ paths:
                   value:
                     code: "500"
                     message: "500 INTERNAL_SERVER_ERROR"
+        '402':
+          description: Character already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              examples:
+                Character already registered response:
+                  value:
+                    code: "402"
+                    message: "Character already registered by the username provided."
         '404':
           description: Not found (Path incorrect)
           content:

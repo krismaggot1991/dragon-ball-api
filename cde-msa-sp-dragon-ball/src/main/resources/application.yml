@@ -17,6 +17,13 @@ spring:
     url: jdbc:postgresql://${TRANSACTIONAL_POSTGRESQL_HOST:localhost}:${TRANSACTIONAL_POSTGRESQL_PORT:5432}/${TRANSACTIONAL_DATA_BASE_NAME:dragonball}
     username: ${TRANSACTIONAL_POSTGRESQL_USERNAME:cde-msa-dragon-ball}
     password: ${TRANSACTIONAL_POSTGRESQL_PASSWORD:12345678}
+  flyway:
+    enable: true
+    validate-on-migrate: true
+    url: jdbc:postgresql://${ONB_POSTGRESQL_HOST:localhost}:${ONB_POSTGRESQL_PORT:5432}/${POSTGRESQL_DBNAME:dragonball}
+    user: ${POSTGRESQL_USERNAME:cde-msa-dragon-ball}
+    password: ${POSTGRESQL_PASSWORD:12345678}
+    schemas: ${POSTGRESQL_SCHEMA:dragonball}
 
 management:
   endpoint:

@@ -11,6 +11,7 @@ import com.pichincha.services.server.models.LoginUserRequest;
 import com.pichincha.services.server.models.RegisterUserRequest;
 import com.pichincha.services.server.models.SpecificCharacterResponse;
 import com.pichincha.sp.service.DragonBallService;
+import com.pichincha.sp.service.FavoriteService;
 import com.pichincha.sp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,6 +27,7 @@ public class DragonBallController implements SupportApi {
 
   DragonBallService dragonBallService;
   UserService userService;
+  FavoriteService favoriteService;
 
   @Override
   public Mono<ResponseEntity<CharactersResponse>> supportDragonBallV1CharactersGet(String xGuid, String xProcess, String xFlow,
@@ -42,7 +44,7 @@ public class DragonBallController implements SupportApi {
   @Override
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1FavoritesPost(String xGuid, String xProcess, String xFlow,
       FavoritesRequest favoritesRequest, ServerWebExchange exchange) {
-    return null;
+    return favoriteService.registerFavoriteCharacter(favoritesRequest).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
