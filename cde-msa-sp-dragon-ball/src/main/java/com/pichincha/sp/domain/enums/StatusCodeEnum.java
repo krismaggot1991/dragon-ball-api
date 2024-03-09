@@ -8,7 +8,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum StatusCodeEnum {
 
-  OK("200", "OK");
+  OK("200", "OK"),
+  NOT_FOUND("404", "Character not found");
   String code;
   String message;
 

@@ -41,6 +41,8 @@ public class DragonBallServiceImpl implements DragonBallService {
           specificCharacterResponse.setMessage(StatusCodeEnum.OK.getMessage());
           specificCharacterResponse.setData(dragonBallMapper.toSpecificCharactersDataResponse(dragonBallExternalCharacterResponse));
           return specificCharacterResponse;
-        });
+        }).onErrorResume(throwable -> Mono.just(new SpecificCharacterResponse()
+            .code(StatusCodeEnum.NOT_FOUND.getCode())
+            .message(StatusCodeEnum.NOT_FOUND.getMessage())));
   }
 }
