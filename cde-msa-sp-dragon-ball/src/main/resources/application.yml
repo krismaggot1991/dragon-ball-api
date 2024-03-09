@@ -4,6 +4,19 @@ spring:
   header:
     channel: digital
     medium: web
+  datasource:
+    hikari:
+      pool-name: Postgresql
+      connectionTimeout: 120000
+      validation-timeout: 50000
+      idleTimeout: 300000
+      maxLifetime: 600000
+      minimum-idle: ${DB_MIN_CONNECTIONS:10}
+      maximum-pool-size: ${DB_MAX_CONNECTIONS:20}
+      leak-detection-threshold: 120000
+    url: jdbc:postgresql://${TRANSACTIONAL_POSTGRESQL_HOST:localhost}:${TRANSACTIONAL_POSTGRESQL_PORT:5432}/${TRANSACTIONAL_DATA_BASE_NAME:dragonball}
+    username: ${TRANSACTIONAL_POSTGRESQL_USERNAME:cde-msa-dragon-ball}
+    password: ${TRANSACTIONAL_POSTGRESQL_PASSWORD:12345678}
 
 management:
   endpoint:
