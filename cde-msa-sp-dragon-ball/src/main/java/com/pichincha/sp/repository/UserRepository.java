@@ -9,4 +9,6 @@ import reactor.core.publisher.Flux;
 public interface UserRepository extends ReactiveCrudRepository<UserEntity, Long> {
 
   Flux<UserEntity> findByUserNameOrEmail(String userName, String email);
+
+  Flux<UserEntity> findByEmailAndPassword(String email, String password);
 }

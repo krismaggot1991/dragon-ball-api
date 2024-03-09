@@ -59,7 +59,7 @@ public class DragonBallController implements SupportApi {
   @Override
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1LoginPost(String xGuid, String xProcess, String xFlow,
       LoginUserRequest loginUserRequest, ServerWebExchange exchange) {
-    return null;
+    return userService.loginUser(loginUserRequest).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override

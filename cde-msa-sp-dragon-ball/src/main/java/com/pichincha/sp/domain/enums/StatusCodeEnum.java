@@ -10,7 +10,8 @@ public enum StatusCodeEnum {
 
   OK("200", "OK"),
   NOT_FOUND("404", "Character not found"),
-  USER_ALREADY_EXISTS("406", "User already exists");
+  USER_ALREADY_EXISTS("406", "User already exists"),
+  LOGIN_INCORRECT("406", "Email or password incorrect");
   String code;
   String message;
 

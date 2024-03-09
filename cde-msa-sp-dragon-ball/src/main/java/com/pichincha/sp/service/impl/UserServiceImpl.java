@@ -3,6 +3,7 @@ package com.pichincha.sp.service.impl;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.pichincha.services.server.models.GenericResponse;
+import com.pichincha.services.server.models.LoginUserRequest;
 import com.pichincha.services.server.models.RegisterUserRequest;
 import com.pichincha.sp.domain.enums.StatusCodeEnum;
 import com.pichincha.sp.domain.jpa.UserEntity;
@@ -39,5 +40,18 @@ public class UserServiceImpl implements UserService {
         .switchIfEmpty(Mono.defer(() -> Mono.just(new GenericResponse()
             .code(StatusCodeEnum.USER_ALREADY_EXISTS.getCode())
             .message(StatusCodeEnum.USER_ALREADY_EXISTS.getMessage()))));
+  }
+
+  @Override
+  public Mono<GenericResponse> loginUser(LoginUserRequest loginUserRequest) {
+    return userRepository.findByEmailAndPassword(loginUserRequest.getEmail(), loginUserRequest.getPassword())
+        .collectList()
+        .filter(List::isEmpty)
+        .flatMap(userEntities -> Mono.just(new GenericResponse()
+            .code(StatusCodeEnum.LOGIN_INCORRECT.getCode())
+            .message(StatusCodeEnum.LOGIN_INCORRECT.getMessage())))
+        .switchIfEmpty(Mono.defer(() -> Mono.just(new GenericResponse()
+            .code(StatusCodeEnum.OK.getCode())
+            .message(StatusCodeEnum.OK.getMessage()))));
   }
 }
