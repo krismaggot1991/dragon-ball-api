@@ -10,4 +10,6 @@ public interface FavoriteService {
   Mono<GenericResponse> registerFavoriteCharacter(FavoritesRequest favoritesRequest);
 
   Mono<FavoriteCharacterResponse> getFavoriteFromUser(String username);
+
+  Mono<GenericResponse> deleteFavoriteCharacterFromUser(String username, String characterId);
 }

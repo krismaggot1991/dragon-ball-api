@@ -64,4 +64,17 @@ public class FavoriteServiceImpl implements FavoriteService {
             .message(StatusCodeEnum.OK.getMessage()));
   }
 
+  @Override
+  public Mono<GenericResponse> deleteFavoriteCharacterFromUser(String username, String characterId) {
+    return favoriteRepository.findByUserNameAndCharacterId(username, characterId)
+        .flatMap(favoriteEntities -> favoriteRepository.delete(favoriteEntities)
+            .flatMap(unused -> Mono.just(new GenericResponse()
+                .code(StatusCodeEnum.OK.getCode())
+                .message(StatusCodeEnum.OK.getMessage()))))
+        .collectList()
+        .map(data -> new GenericResponse()
+            .code(StatusCodeEnum.OK.getCode())
+            .message(StatusCodeEnum.OK.getMessage()));
+  }
+
 }

@@ -51,7 +51,7 @@ public class DragonBallController implements SupportApi {
   @Override
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1FavoritesUsernameCharacterIdDelete(String username, String characterId,
       String xGuid, String xProcess, String xFlow, ServerWebExchange exchange) {
-    return null;
+    return favoriteService.deleteFavoriteCharacterFromUser(username, characterId).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
