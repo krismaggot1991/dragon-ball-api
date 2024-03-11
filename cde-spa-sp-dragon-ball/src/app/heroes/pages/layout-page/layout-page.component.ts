@@ -15,15 +15,16 @@ export class LayoutPageComponent {
   public sidebarItems = [
     { label: 'Listado', icon: 'label', url: './list' },
     { label: 'Añadir', icon: 'add', url: './new-hero' },
+    { label: 'Registrar usuario', icon: 'person_add', url: '../auth/new-account' },
     { label: 'Buscar', icon: 'search', url: './search' },
   ];
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  get user():User | undefined {
+  get user(): User | undefined {
     return this.authService.currentUser;
   }
 
