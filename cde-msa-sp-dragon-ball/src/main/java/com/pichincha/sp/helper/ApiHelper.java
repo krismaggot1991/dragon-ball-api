@@ -16,15 +16,6 @@ public class ApiHelper {
 
   WebClient client;
 
-  public <T> Mono<T> doPost(String url, HttpHeaders headers, Object request, Class<T> typeReference) {
-    return client.post()
-        .uri(url)
-        .headers(httpHeaders -> httpHeaders.addAll(headers))
-        .bodyValue(request)
-        .retrieve()
-        .bodyToMono(typeReference);
-  }
-
   public <T> Mono<T> doGet(String url, HttpHeaders headers, Class<T> typeReference) {
     return client.get()
         .uri(url)
