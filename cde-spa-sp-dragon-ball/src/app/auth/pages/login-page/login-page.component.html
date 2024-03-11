@@ -1,28 +1,36 @@
+<form [formGroup]="myForm" (ngSubmit)="onLogin()" autocomplete="off">
+  <div class="flex flex-column">
+    <span class="text-lg mb-4">Login</span>
 
-<div class="flex flex-column">
+    <mat-form-field>
+      <mat-label>Correo</mat-label>
+      <input
+        type="text"
+        formControlName="email"
+        matInput
+        placeholder="Correo"
+      />
+    </mat-form-field>
 
-  <span class="text-lg mb-4">Login</span>
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input
+        type="password"
+        formControlName="password"
+        matInput
+        placeholder="Contraseña"
+      />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Usuario</mat-label>
-    <input type="text" matInput placeholder="Nombre de usuario">
-  </mat-form-field>
+    <button mat-button mat-flat-button color="primary" (click)="onLogin()">
+      <mat-icon>save</mat-icon>
+      Ingresar
+    </button>
 
-  <mat-form-field>
-    <mat-label>Contraseña</mat-label>
-    <input type="password" matInput placeholder="Contraseña">
-  </mat-form-field>
-
-  <button mat-button mat-flat-button color="primary"
-    (click)="onLogin()">
-    <mat-icon>save</mat-icon>
-    Ingresar
-  </button>
-
-
-  <div class="flex justify-content-end mt-5">
-    <a routerLink="/auth/new-account">¿No tienes cuenta?</a>
+    <div class="flex justify-content-end mt-5">
+      <a routerLink="/auth/new-account">¿No tienes cuenta?</a>
+      <span style="margin-left: 30px"></span>
+      <a routerLink="/">Ir a Inicio</a>
+    </div>
   </div>
-
-</div>
-
+</form>

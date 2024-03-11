@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, tap, of, map, catchError } from 'rxjs';
 
 import { environments } from '../../../environments/environments';
 import { User } from '../interfaces/user.interface';
+import { LoginModel } from 'src/app/heroes/components/user.model';
+import { v4 as uuidv4 } from 'uuid';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
   private baseUrl = environments.baseUrl;
@@ -14,31 +16,37 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  get currentUser():User|undefined {
-    if ( !this.user ) return undefined;
-    return structuredClone( this.user );
+  get currentUser(): User | undefined {
+    if (!this.user) return undefined;
+    return structuredClone(this.user);
   }
 
-  login( email: string, password: string ):Observable<User> {
+  login(loginModel: LoginModel): Observable<User> {
     // http.post('login',{ email, password });
-    return this.http.get<User>(`${ this.baseUrl }/users/1`)
+
+    const headers = new HttpHeaders()
+      .set('x-guid', uuidv4())
+      .set('x-process', 'dragonball')
+      .set('x-flow', 'angular');
+
+    return this.http.post<User>(`${this.baseUrl}/support/dragon-ball/v1/login`, loginModel, { headers })
       .pipe(
-        tap( user => this.user = user ),
-        tap( user => localStorage.setItem('token', 'aASDgjhasda.asdasd.aadsf123k' )),
+        tap(user => this.user = user),
+        tap(user => localStorage.setItem('token', 'aASDgjhasda.asdasd.aadsf123k')),
       );
   }
 
   checkAuthentication(): Observable<boolean> {
 
-    if ( !localStorage.getItem('token') ) return of(false);
+    if (!localStorage.getItem('token')) return of(false);
 
     const token = localStorage.getItem('token');
 
-    return this.http.get<User>(`${ this.baseUrl }/users/1`)
+    return this.http.get<User>(`${this.baseUrl}/users/1`)
       .pipe(
-        tap( user => this.user = user ),
-        map( user => !!user ),
-        catchError( err => of(false) )
+        tap(user => this.user = user),
+        map(user => !!user),
+        catchError(err => of(false))
       );
 
   }
