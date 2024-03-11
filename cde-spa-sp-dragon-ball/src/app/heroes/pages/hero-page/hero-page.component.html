@@ -26,13 +26,42 @@
 
     <mat-card-header>
       <mat-card-title>Información</mat-card-title>
-      <mat-card-subtitle>{{ hero.name }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <mat-list>
-        <mat-list-item>{{ hero.gender }}</mat-list-item>
-        <mat-list-item>{{ hero.ki }}</mat-list-item>        
+        <div class="description">
+          <strong>Nombre:</strong> <p>{{ hero.name }}</p>
+        </div>       
+        
+        <div class="description">
+          <strong>Género:</strong> <p>{{ hero.gender }}</p>
+        </div>      
+
+        <div class="description">
+          <strong>Raza:</strong> <p>{{ hero.race }}</p>
+        </div>      
+
+        <div class="description">
+          <strong>Planeta de origen:</strong> <p>{{ hero.originPlanet }}</p>
+        </div>      
+      
+        <div class="description">
+          <strong>Ki:</strong> <p>{{ hero.ki }}</p>
+        </div>      
+            
+        <div class="description">
+          <strong>Max Ki:</strong> <p>{{ hero.maxKi }}</p>
+        </div>    
+
+        <div class="description">
+          <strong>Descripción:</strong> <p>{{ hero.description }}</p>
+        </div>
+
+        <div class="description">
+          <strong>Afiliacion:</strong> <p>{{ hero.affiliation }}</p>
+        </div>
+          
       </mat-list>
 
       <button

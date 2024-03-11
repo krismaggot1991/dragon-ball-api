@@ -26,19 +26,12 @@
     <button mat-button
       mat-raised
       color="primary"
-      [routerLink]="['/heroes/edit', hero.id ]">
-      <mat-icon>edit</mat-icon>
-      Editar
+      [routerLink]="['/heroes', hero.id ]">
+      <mat-icon>visibility</mat-icon>
+      Ver personaje
     </button>
 
     <span class="spacer"></span>
-
-    <button mat-button
-      mat-raised
-      [routerLink]="['/heroes', hero.id ]">
-      <mat-icon>more_horiz</mat-icon>
-      Más
-    </button>
 
   </mat-card-actions>
 
