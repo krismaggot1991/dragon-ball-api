@@ -22,6 +22,20 @@ Para levantar la aplicación Spring Boot, sigue estos pasos:
 
 4. Navega al directorio raíz de la aplicación Spring Boot:
 
-```bash
-cd cde-msa-sp-dragon-ball
+   ```bash
+   cd cde-msa-sp-dragon-ball
 
+5. Compila y ejecuta la aplicación 
+
+   ```bash
+   La aplicacion se levantará sin problemas, solo requiere que se haya creado la base de datos 
+
+6. La aplicación estará disponible en
+
+   ```bash
+   http://localhost:8080
+
+7. Archivo swagger con la documentacion de los enpoints expuestos
+
+   ```bash
+   https://github.com/krismaggot1991/dragon-ball-api/blob/main/cde-msa-sp-dragon-ball/src/main/resources/openapi.yaml
