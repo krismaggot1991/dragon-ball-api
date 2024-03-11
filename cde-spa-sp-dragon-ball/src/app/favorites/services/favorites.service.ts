@@ -45,4 +45,13 @@ export class FavoritesService {
     return this.http.post<GenericResponse>(`${this.baseUrl}/support/dragon-ball/v1/favorites`, addFavoriteModel, { headers });
   }
 
+  deletefavorite(userName: string, idCharacter: string): Observable<CharacterResponse> {
+    const headers = new HttpHeaders()
+      .set('x-guid', uuidv4())
+      .set('x-process', 'dragonball')
+      .set('x-flow', 'angular');
+
+    return this.http.delete<CharacterResponse>(`${this.baseUrl}/support/dragon-ball/v1/favorites/${userName}/${idCharacter}`, { headers });
+  }
+
 }

@@ -24,4 +24,17 @@
   </mat-card-content>
 
   <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button
+      mat-button
+      mat-raised
+      color="primary"
+      (click)="deleteFavorite(hero.id)"
+    >
+      <mat-icon>delete</mat-icon>
+      eliminar de favoritos
+    </button>
+
+    <span class="spacer"></span>
+  </mat-card-actions>
 </mat-card>

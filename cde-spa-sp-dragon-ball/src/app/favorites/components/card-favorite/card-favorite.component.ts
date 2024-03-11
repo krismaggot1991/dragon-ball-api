@@ -65,9 +65,6 @@ export class CardFavoriteAddComponent implements OnInit {
       console.error('El token de usuario es nulo.');
       // Aquí puedes manejar la situación en la que el token sea nulo, por ejemplo, redireccionar a la página de inicio de sesión.
     }
-
-
-
   }
 
 }
