@@ -5,6 +5,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { Hero } from '../interfaces/hero.interface';
 import { environments } from '../../../environments/environments';
 import { CharacterResponse } from '../interfaces/character.interface';
+import { SpecifcCharacterResponse } from '../interfaces/character.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HeroesService {
@@ -28,8 +29,13 @@ export class HeroesService {
     return this.http.get<CharacterResponse>(`http://localhost:8080/support/dragon-ball/v1/characters`, { headers });
   }
 
-  getHeroById(id: string): Observable<Hero | undefined> {
-    return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`)
+  getHeroById(id: string): Observable<SpecifcCharacterResponse | undefined> {
+    const headers = new HttpHeaders()
+      .set('x-guid', 'ccd2932b-0345-4ba3-a1b3-7b2b2184a306')
+      .set('x-process', 'dragonball')
+      .set('x-flow', 'angular');
+
+    return this.http.get<SpecifcCharacterResponse>(`http://localhost:8080/support/dragon-ball/v1/characters/${id}`, { headers })
       .pipe(
         catchError(error => of(undefined))
       );

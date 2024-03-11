@@ -61,7 +61,7 @@ export class NewPageComponent implements OnInit {
           return this.router.navigateByUrl('/');
         }
 
-        this.heroForm.reset(hero);
+        this.heroForm.reset(hero.data);
         return;
       });
 

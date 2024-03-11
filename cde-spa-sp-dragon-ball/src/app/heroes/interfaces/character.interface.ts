@@ -15,3 +15,9 @@ export interface CharacterData {
   ki: string;
   image?: string;
 }
+
+export interface SpecifcCharacterResponse {
+  code: string;
+  message: string;
+  data: Hero;
+}

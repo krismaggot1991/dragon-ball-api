@@ -6,6 +6,11 @@ export interface Hero {
   gender: string;
   ki: string;
   image?: string;
+  race?: string;
+  originPlanet?: string;
+  maxKi?: string;
+  description?: string;
+  affiliation?: string;
 }
 
 export enum Publisher {
