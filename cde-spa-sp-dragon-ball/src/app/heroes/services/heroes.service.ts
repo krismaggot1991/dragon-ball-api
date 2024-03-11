@@ -18,11 +18,6 @@ export class HeroesService {
 
   constructor(private http: HttpClient) { }
 
-
-  getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(`${this.baseUrl}/heroes`);
-  }
-
   getCharacters(): Observable<CharacterResponse> {
     const headers = new HttpHeaders()
       .set('x-guid', uuidv4())

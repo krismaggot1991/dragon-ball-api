@@ -7,12 +7,16 @@ import { MaterialModule } from '../material/material.module';
 
 import { FavoriteListComponent } from './components/favorite-list/favorite-list.component';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
+import { CardFavoriteComponent } from './components/card/card.component';
+import { FavoriteImagePipe } from './pipes/favorite-image.pipe';
 
 
 @NgModule({
     declarations: [
         LayoutPageComponent,
-        FavoriteListComponent
+        FavoriteListComponent,
+        CardFavoriteComponent,
+        FavoriteImagePipe
     ],
     imports: [
         CommonModule,

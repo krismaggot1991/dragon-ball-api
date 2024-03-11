@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ hero.name }}</mat-card-title>
+  </mat-card-header>
+
+  <!-- TODO: imagen -->
+  <img
+    mat-card-image
+    [src]="hero | heroImage2"
+    [alt]="hero.name"
+    style="max-width: 100%; max-height: 270px"
+  />
+
+  <mat-card-content class="mt-2">
+    <p>
+      <strong>Género</strong> {{ hero.gender }}
+      <br />
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let name of hero.ki.split(',') | slice : 0 : 3">
+          {{ name }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+</mat-card>
