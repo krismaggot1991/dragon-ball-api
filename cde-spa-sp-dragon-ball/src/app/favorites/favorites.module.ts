@@ -9,6 +9,8 @@ import { FavoriteListComponent } from './components/favorite-list/favorite-list.
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { CardFavoriteComponent } from './components/card/card.component';
 import { FavoriteImagePipe } from './pipes/favorite-image.pipe';
+import { ListFavoritePageComponent } from './pages/list-page/list-page.component';
+import { CardFavoriteAddComponent } from './components/card-favorite/card-favorite.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { FavoriteImagePipe } from './pipes/favorite-image.pipe';
         LayoutPageComponent,
         FavoriteListComponent,
         CardFavoriteComponent,
-        FavoriteImagePipe
+        FavoriteImagePipe,
+        ListFavoritePageComponent,
+        CardFavoriteAddComponent
     ],
     imports: [
         CommonModule,

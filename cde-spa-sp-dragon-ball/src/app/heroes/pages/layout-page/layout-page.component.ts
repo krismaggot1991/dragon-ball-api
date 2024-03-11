@@ -16,7 +16,7 @@ export class LayoutPageComponent {
     { label: 'Listado', icon: 'label', url: './list' },
     { label: 'Ver favoritos', icon: 'favorite', url: '../favorites/favorite-list' },
     { label: 'Registrar usuario', icon: 'person_add', url: '../auth/new-account' },
-    { label: 'Buscar', icon: 'search', url: './search' },
+    { label: 'Agregar favoritos', icon: 'star', url: '../favorites/favorite-add' },
   ];
 
   constructor(
