@@ -39,3 +39,30 @@ Para levantar la aplicación Spring Boot, sigue estos pasos:
 
    ```bash
    https://github.com/krismaggot1991/dragon-ball-api/blob/main/cde-msa-sp-dragon-ball/src/main/resources/openapi.yaml
+
+## Levantar Aplicación Angular
+
+Para levantar la aplicación Angular, sigue estos pasos:
+
+1. Asegúrate de tener instalado Node.js (version 20.11.1 o superior) y npm en tu sistema. Puedes descargarlos desde Node.js Downloads.
+
+2. Clona el repositorio de la aplicación Spring Boot:
+
+   ```bash
+   git clone https://github.com/krismaggot1991/dragon-ball-api.git
+
+4. Navega al directorio raíz de la aplicación Spring Boot:
+
+   ```bash
+   cd cde-spa-sp-dragon-ball
+
+5. Compila y ejecuta la aplicación 
+
+   ```bash
+   npm install
+   ng serve
+
+6. La aplicación estará disponible en
+
+   ```bash
+   http://localhost:4200/heroes/list
