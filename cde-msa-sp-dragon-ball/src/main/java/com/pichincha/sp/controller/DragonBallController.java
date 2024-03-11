@@ -2,6 +2,8 @@ package com.pichincha.sp.controller;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.log.annotation.Loggable;
+import com.pichincha.log.constants.Level;
 import com.pichincha.services.server.SupportApi;
 import com.pichincha.services.server.models.CharactersResponse;
 import com.pichincha.services.server.models.FavoriteCharacterResponse;
@@ -31,42 +33,49 @@ public class DragonBallController implements SupportApi {
   FavoriteService favoriteService;
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<CharactersResponse>> supportDragonBallV1CharactersGet(String xGuid, String xProcess, String xFlow,
       ServerWebExchange exchange) {
     return dragonBallService.getAllCharacters().map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<SpecificCharacterResponse>> supportDragonBallV1CharactersIdGet(String id, String xGuid, String xProcess, String xFlow,
       ServerWebExchange exchange) {
     return dragonBallService.getSpecificCharacter(id).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1FavoritesPost(String xGuid, String xProcess, String xFlow,
       FavoritesRequest favoritesRequest, ServerWebExchange exchange) {
     return favoriteService.registerFavoriteCharacter(favoritesRequest).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1FavoritesUsernameCharacterIdDelete(String username, String characterId,
       String xGuid, String xProcess, String xFlow, ServerWebExchange exchange) {
     return favoriteService.deleteFavoriteCharacterFromUser(username, characterId).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<FavoriteCharacterResponse>> supportDragonBallV1FavoritesUsernameGet(String username, String xGuid, String xProcess,
       String xFlow, ServerWebExchange exchange) {
     return favoriteService.getFavoriteFromUser(username).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<LoginResponse>> supportDragonBallV1LoginPost(String xGuid, String xProcess, String xFlow,
       LoginUserRequest loginUserRequest, ServerWebExchange exchange) {
     return userService.loginUser(loginUserRequest).map(result -> ResponseEntity.ok().body(result));
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_001)
   public Mono<ResponseEntity<GenericResponse>> supportDragonBallV1UserPost(String xGuid, String xProcess, String xFlow,
       RegisterUserRequest registerUserRequest, ServerWebExchange exchange) {
     return userService.registerUser(registerUserRequest).map(result -> ResponseEntity.ok().body(result));

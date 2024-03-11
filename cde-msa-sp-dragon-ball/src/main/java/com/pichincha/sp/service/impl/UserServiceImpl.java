@@ -2,6 +2,8 @@ package com.pichincha.sp.service.impl;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.log.annotation.Loggable;
+import com.pichincha.log.constants.Level;
 import com.pichincha.services.server.models.GenericResponse;
 import com.pichincha.services.server.models.LoginDataResponse;
 import com.pichincha.services.server.models.LoginResponse;
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
   UserRepository userRepository;
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<GenericResponse> registerUser(RegisterUserRequest registerUserRequest) {
     return userRepository.findByUserNameOrEmail(registerUserRequest.getUserName(), registerUserRequest.getEmail())
         .collectList()
@@ -45,6 +48,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<LoginResponse> loginUser(LoginUserRequest loginUserRequest) {
     return userRepository.findByEmailAndPassword(loginUserRequest.getEmail(), loginUserRequest.getPassword())
         .collectList()

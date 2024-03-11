@@ -2,6 +2,8 @@ package com.pichincha.sp.service.impl;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.log.annotation.Loggable;
+import com.pichincha.log.constants.Level;
 import com.pichincha.services.server.models.CharactersResponse;
 import com.pichincha.services.server.models.SpecificCharacterResponse;
 import com.pichincha.sp.domain.enums.StatusCodeEnum;
@@ -22,6 +24,7 @@ public class DragonBallServiceImpl implements DragonBallService {
   DragonBallMapper dragonBallMapper;
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<CharactersResponse> getAllCharacters() {
     return externalDragonBallRepository.getAllCharacters()
         .map(dragonBallExternalApiResponse -> {
@@ -33,6 +36,7 @@ public class DragonBallServiceImpl implements DragonBallService {
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<SpecificCharacterResponse> getSpecificCharacter(String id) {
     return externalDragonBallRepository.getSpecificCharacter(id)
         .map(dragonBallExternalCharacterResponse -> {

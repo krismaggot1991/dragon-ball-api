@@ -1,5 +1,14 @@
 buildscript {
     repositories {
+        mavenCentral()
+        maven {
+            url 'https://pkgs.dev.azure.com/BancoPichinchaEC/tre-onboard/_packaging/onboard/maven/v1'
+            name 'onboard'
+            credentials {
+                username 'BancoPichinchaEC'
+                password 'bf6vaiw32rjk626hkxvkkd5r6wxjheszqzoez527ybglpbnyozpq'
+            }
+        }
         maven {
             url "https://pkgs.dev.azure.com/BancoPichinchaEC/0f20bf47-c965-46fe-8bd4-91df57fbb2e7/_packaging/Framework/maven/v1"
             name "BancoPichinchaEC"
@@ -37,6 +46,9 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 ext["log4j2.version"] = "2.17.1"
@@ -51,19 +63,38 @@ repositories {
             password 'bf6vaiw32rjk626hkxvkkd5r6wxjheszqzoez527ybglpbnyozpq'
         }
     }
+    maven {
+        url 'https://pkgs.dev.azure.com/BancoPichinchaEC/tre-onboard/_packaging/onboard/maven/v1'
+        name 'onboard'
+        credentials {
+            username 'BancoPichinchaEC'
+            password 'bf6vaiw32rjk626hkxvkkd5r6wxjheszqzoez527ybglpbnyozpq'
+        }
+    }
+    maven {
+        url 'https://pkgs.dev.azure.com/BancoPichinchaEC/tre-common/_packaging/common/maven/v1'
+        name 'common'
+        credentials {
+            username 'BancoPichinchaEC'
+            password 'bf6vaiw32rjk626hkxvkkd5r6wxjheszqzoez527ybglpbnyozpq'
+        }
+    }
 }
+
 
 ext {
     mapstructVersion = "1.4.2.Final"
     lombokVersion = "1.18.26"
     mapstruct = "1.5.3.Final"
+    pichincha = [lib: [log: "1.7.0"]]
 }
-
 
 dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'io.micrometer:micrometer-tracing-bridge-otel'
 
     //dependency Base
     implementation "org.springframework.boot:spring-boot-starter-actuator"
@@ -85,7 +116,7 @@ dependencies {
 
 
     //dependencias feing o web client
-
+    implementation "com.pichincha:onb-lib-log:${pichincha.lib.log}"
 
     //dependencias db
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-r2dbc', version: '3.1.0'

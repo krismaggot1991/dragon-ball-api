@@ -2,6 +2,8 @@ package com.pichincha.sp.repository.impl;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.log.annotation.Loggable;
+import com.pichincha.log.constants.Level;
 import com.pichincha.sp.configuration.ApplicationProperties;
 import com.pichincha.sp.helper.ApiHelper;
 import com.pichincha.sp.repository.ExternalDragonBallRepository;
@@ -22,6 +24,7 @@ public class ExternalDragonBallRepositoryImpl implements ExternalDragonBallRepos
   ApplicationProperties applicationProperties;
 
   @Override
+  @Loggable(level = Level.LEVEL_003)
   public Mono<DragonBallExternalApiResponse> getAllCharacters() {
     String url = applicationProperties.getServices().getDragonBall().getBasePath()
         .concat(applicationProperties.getServices().getDragonBall().getAllCharacters().getPath());
@@ -29,6 +32,7 @@ public class ExternalDragonBallRepositoryImpl implements ExternalDragonBallRepos
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_003)
   public Mono<DragonBallExternalCharacterResponse> getSpecificCharacter(String id) {
     String url = applicationProperties.getServices().getDragonBall().getBasePath()
         .concat(String.format(applicationProperties.getServices().getDragonBall().getSpecificCharacter().getPath(), id));

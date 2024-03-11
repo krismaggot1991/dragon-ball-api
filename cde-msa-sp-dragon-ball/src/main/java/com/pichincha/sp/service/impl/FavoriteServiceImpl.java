@@ -2,6 +2,8 @@ package com.pichincha.sp.service.impl;
 
 import static lombok.AccessLevel.PRIVATE;
 
+import com.pichincha.log.annotation.Loggable;
+import com.pichincha.log.constants.Level;
 import com.pichincha.services.server.models.FavoriteCharacterResponse;
 import com.pichincha.services.server.models.FavoritesRequest;
 import com.pichincha.services.server.models.GenericResponse;
@@ -29,6 +31,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   FavoriteRepository favoriteRepository;
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<GenericResponse> registerFavoriteCharacter(FavoritesRequest favoritesRequest) {
     return Mono.zip(userRepository.findByUserName(favoritesRequest.getUsername()).collectList(),
             dragonBallService.getSpecificCharacter(favoritesRequest.getCharacterId()))
@@ -54,6 +57,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<FavoriteCharacterResponse> getFavoriteFromUser(String username) {
     return favoriteRepository.findByUserName(username)
         .flatMap(favoriteEntity -> dragonBallService.getSpecificCharacter(favoriteEntity.getCharacterId())
@@ -66,6 +70,7 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   @Override
+  @Loggable(level = Level.LEVEL_002)
   public Mono<GenericResponse> deleteFavoriteCharacterFromUser(String username, String characterId) {
     return favoriteRepository.findByUserNameAndCharacterId(username, characterId)
         .flatMap(favoriteEntities -> favoriteRepository.delete(favoriteEntities)

@@ -1,7 +1,11 @@
 package com.pichincha.sp;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.status.StatusLogger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import reactor.core.publisher.Hooks;
 
 /**
  * Arquitectura tradicional para el recurso cde-msa-sp-dragon-ball extendiendo de la interfaz generada. <br/>
@@ -24,7 +28,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0
  */
 @SpringBootApplication
+@ComponentScan("com.pichincha")
 public class OptimusMainApplication {
+
+  static {
+    StatusLogger.getLogger().setLevel(Level.OFF);
+    Hooks.enableAutomaticContextPropagation();
+  }
 
   public static void main(String[] args) {
     SpringApplication.run(OptimusMainApplication.class, args);
