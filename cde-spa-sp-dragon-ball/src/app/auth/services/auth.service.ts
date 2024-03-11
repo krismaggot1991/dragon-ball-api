@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   login(loginModel: LoginModel): Observable<User> {
-    // http.post('login',{ email, password });
 
     const headers = new HttpHeaders()
       .set('x-guid', uuidv4())
@@ -32,23 +31,21 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/support/dragon-ball/v1/login`, loginModel, { headers })
       .pipe(
         tap(user => this.user = user),
-        tap(user => localStorage.setItem('token', 'aASDgjhasda.asdasd.aadsf123k')),
+        tap(user => localStorage.setItem('token', user.data.userName)),
       );
   }
 
-  checkAuthentication(): Observable<boolean> {
+  checkAuthentication(): boolean {
 
-    if (!localStorage.getItem('token')) return of(false);
+
+    if (!localStorage.getItem('token')) return false;
 
     const token = localStorage.getItem('token');
 
-    return this.http.get<User>(`${this.baseUrl}/users/1`)
-      .pipe(
-        tap(user => this.user = user),
-        map(user => !!user),
-        catchError(err => of(false))
-      );
+    console.info('entra');
+    console.info(token);
 
+    return true;
   }
 
 

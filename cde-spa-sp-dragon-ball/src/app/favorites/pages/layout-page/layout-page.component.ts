@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Router } from '@angular/router';
-
-import { AuthService } from '../../../auth/services/auth.service';
-import { User } from '../../../auth/interfaces/user.interface';
+import { User } from 'src/app/auth/interfaces/user.interface';
 
 @Component({
   selector: 'app-layout-page',
@@ -11,9 +10,8 @@ import { User } from '../../../auth/interfaces/user.interface';
   ]
 })
 export class LayoutPageComponent {
-
   public sidebarItems = [
-    { label: 'Listado', icon: 'label', url: './list' },
+    { label: 'Listado', icon: 'label', url: '../heroes/list' },
     { label: 'Ver favoritos', icon: 'favorite', url: '../favorites/favorite-list' },
     { label: 'Registrar usuario', icon: 'person_add', url: '../auth/new-account' },
     { label: 'Buscar', icon: 'search', url: './search' },

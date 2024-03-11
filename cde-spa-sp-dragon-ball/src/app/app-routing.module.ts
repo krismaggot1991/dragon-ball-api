@@ -9,15 +9,21 @@ import { PublicGuard } from './auth/guards/public.guard';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule ),
-    canActivate: [ PublicGuard ],
-    canMatch: [ PublicGuard ]
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    canActivate: [PublicGuard],
+    canMatch: [PublicGuard]
   },
   {
     path: 'heroes',
-    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule ),
-    canActivate: [ AuthGuard ],
-    canMatch: [ AuthGuard ]
+    loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
+    canActivate: [PublicGuard],
+    canMatch: [PublicGuard]
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesModule),
+    canActivate: [AuthGuard],
+    canMatch: [AuthGuard]
   },
   {
     path: '404',

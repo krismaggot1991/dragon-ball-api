@@ -4,7 +4,7 @@ import { Observable, tap, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PublicGuard implements CanMatch, CanActivate {
 
   constructor(
@@ -12,33 +12,29 @@ export class PublicGuard implements CanMatch, CanActivate {
     private router: Router,
   ) { }
 
-  private checkAuthStatus(): boolean | Observable<boolean> {
+  private checkAuthStatus(): boolean {
 
-    return this.authService.checkAuthentication()
-      .pipe(
-        tap( isAuthenticated => console.log('Authenticated:', isAuthenticated ) ),
-        tap( isAuthenticated => {
-          if ( isAuthenticated ) {
-            this.router.navigate(['./'])
-          }
-        }),
-        map( isAuthenticated => !isAuthenticated )
-      )
+    const isAuthenticated = this.authService.checkAuthentication();
+    console.log('Authenticated:', isAuthenticated);
+    if (!isAuthenticated) {
+      this.router.navigate(['./auth/login']);
+    }
+    return isAuthenticated;
 
   }
 
 
-  canMatch(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> {
+  canMatch(route: Route, segments: UrlSegment[]): boolean {
     // console.log('Can Match');
     // console.log({ route, segments })
-    return this.checkAuthStatus();
+    return true;
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     // console.log('Can Activate');
     // console.log({ route, state })
 
-    return this.checkAuthStatus();
+    return true;
   }
 
 }
