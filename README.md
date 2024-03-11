@@ -66,3 +66,8 @@ Para levantar la aplicación Angular, sigue estos pasos:
 
    ```bash
    http://localhost:4200/heroes/list
+
+
+## Captura de pantalla
+
+![Logo](resources/capture.png)
