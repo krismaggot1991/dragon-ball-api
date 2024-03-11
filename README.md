@@ -71,3 +71,8 @@ Para levantar la aplicación Angular, sigue estos pasos:
 ## Captura de pantalla
 
 ![Logo](resources/capture.png)
+
+## Video demostrativo de la aplicación corriendo
+
+   ```bash
+   https://www.youtube.com/watch?v=1gTzRK2AOEQ
