@@ -15,13 +15,13 @@ export class ListPageComponent implements OnInit {
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
-    this.heroesService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    //this.heroesService.getHeroes()
+    //.subscribe(heroes => this.heroes = heroes);
 
     this.heroesService.getCharacters()
       .subscribe(heroes2 => {
         console.log('Respuesta del servicio:', heroes2);
-        //this.heroes = heroes;
+        this.heroes = heroes2.data;
       });
   }
 
