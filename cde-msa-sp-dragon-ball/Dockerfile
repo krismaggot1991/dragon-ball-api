@@ -1,9 +1,3 @@
-ARG IMAGE
-FROM $IMAGE
-
-RUN mkdir /opt/build/
-WORKDIR /opt/build/
-COPY ./build/*.txt /opt/build/
-COPY ./build/libs/*.jar /opt/build/
-
-CMD ["/bin/sh", "/opt/build/init.sh"]
+FROM openjdk:17
+ADD ./build/libs/cde-msa-sp-dragon-ball-1.0.1.jar app-dragon-ball.jar
+ENTRYPOINT ["java", "-jar", "/app-dragon-ball.jar"]
