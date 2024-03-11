@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Hero } from '../interfaces/hero.interface';
 import { environments } from '../../../environments/environments';
 import { CharacterResponse } from '../interfaces/character.interface';
 import { SpecifcCharacterResponse } from '../interfaces/character.interface';
+import { GenericResponse } from '../interfaces/character.interface';
+import { UserModel } from '../interfaces/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class HeroesService {
@@ -22,20 +25,20 @@ export class HeroesService {
 
   getCharacters(): Observable<CharacterResponse> {
     const headers = new HttpHeaders()
-      .set('x-guid', 'ccd2932b-0345-4ba3-a1b3-7b2b2184a306')
+      .set('x-guid', uuidv4())
       .set('x-process', 'dragonball')
       .set('x-flow', 'angular');
 
-    return this.http.get<CharacterResponse>(`http://localhost:8080/support/dragon-ball/v1/characters`, { headers });
+    return this.http.get<CharacterResponse>(`${this.baseUrl}/support/dragon-ball/v1/characters`, { headers });
   }
 
   getHeroById(id: string): Observable<SpecifcCharacterResponse | undefined> {
     const headers = new HttpHeaders()
-      .set('x-guid', 'ccd2932b-0345-4ba3-a1b3-7b2b2184a306')
+      .set('x-guid', uuidv4())
       .set('x-process', 'dragonball')
       .set('x-flow', 'angular');
 
-    return this.http.get<SpecifcCharacterResponse>(`http://localhost:8080/support/dragon-ball/v1/characters/${id}`, { headers })
+    return this.http.get<SpecifcCharacterResponse>(`${this.baseUrl}/support/dragon-ball/v1/characters/${id}`, { headers })
       .pipe(
         catchError(error => of(undefined))
       );
@@ -48,6 +51,15 @@ export class HeroesService {
 
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(`${this.baseUrl}/heroes`, hero);
+  }
+
+  registerUser(user: UserModel): Observable<GenericResponse> {
+    const headers = new HttpHeaders()
+      .set('x-guid', uuidv4())
+      .set('x-process', 'dragonball')
+      .set('x-flow', 'angular');
+
+    return this.http.post<GenericResponse>(`${this.baseUrl}/support/dragon-ball/v1/user`, user, { headers });
   }
 
   updateHero(hero: Hero): Observable<Hero> {

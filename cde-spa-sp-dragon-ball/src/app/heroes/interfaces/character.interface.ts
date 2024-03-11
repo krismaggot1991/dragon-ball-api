@@ -21,3 +21,8 @@ export interface SpecifcCharacterResponse {
   message: string;
   data: Hero;
 }
+
+export interface GenericResponse {
+  code: string;
+  message: string;
+}
