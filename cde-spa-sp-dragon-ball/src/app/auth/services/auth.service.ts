@@ -31,7 +31,7 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}/support/dragon-ball/v1/login`, loginModel, { headers })
       .pipe(
         tap(user => this.user = user),
-        tap(user => localStorage.setItem('token', user.data.userName)),
+        tap(user => localStorage.setItem('token', user?.data?.userName)),
       );
   }
 
