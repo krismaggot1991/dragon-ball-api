@@ -1,0 +1,4 @@
+.hero-image {
+  max-width: 100%; /* Establece el ancho máximo de la imagen */
+  max-height: 200px; /* Establece la altura máxima de la imagen */
+}
